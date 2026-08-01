@@ -116,7 +116,7 @@ export default function Cart() {
                 <Typography>Total :</Typography>
                 <Typography sx={{ fontWeight: "bold", color: "primary.main" }}>${grandTotal.toFixed(2)}</Typography>
               </Box>
-              <Box sx={{ borderTop: "1px solid", borderColor: "divider", pt: 3 }}>
+              <Box sx={{ borderTop: "1px solid", borderColor: "divider", pt: 3 , pb: 2, p: "50px"}}>
                 <Button type="submit" fullWidth variant="contained" color="primary" sx={{ py: 1.7, fontWeight: "bold", fontSize: 18 }}>
                   Place Order
                 </Button>
@@ -125,7 +125,7 @@ export default function Cart() {
           </Paper>
 
           {/* Delivery Address */}
-          <Box sx={{ width: { xs: "100%", md: "45%" } }}>
+          <Box sx={{ width: { xs: "100%", md: "40%" } }}>
             <Paper sx={{ mb: 3, borderRadius: "5px", overflow: "hidden", border: "1px solid", borderColor: "divider" }}>
               <Typography sx={{ px: 2.5, py: 1.5, bgcolor: "primary.main", color: "#fff" }} variant="h6">
                 Delivery Address
@@ -135,18 +135,6 @@ export default function Cart() {
                 <TextField label="Name" size="small" {...register("name", { required: true })} error={!!errors.name} required />
                 <TextField label="Address" size="small" {...register("address", { required: true })} error={!!errors.address} required />
                 <TextField label="Phone" size="small" {...register("phone", { required: true })} error={!!errors.phone} required />
-              </Box>
-            </Paper>
-
-            <Paper sx={{ borderRadius: "5px", overflow: "hidden", border: "1px solid", borderColor: "divider" }}>
-              <Typography sx={{ px: 2.5, py: 1.5, bgcolor: "primary.main", color: "#fff" }} variant="h6">
-                Coupon Code (Coming Soon)
-              </Typography>
-              <Box sx={{ p: 2.5 }}>
-                <TextField label="Coupon Code" size="small" fullWidth disabled sx={{ mb: 2 }} />
-                <Box sx={{ textAlign: "center" }}>
-                  <Button variant="contained" color="primary" disabled sx={{ width: "50%" }}>Apply Coupon</Button>
-                </Box>
               </Box>
             </Paper>
           </Box>

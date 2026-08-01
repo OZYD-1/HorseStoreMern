@@ -46,7 +46,7 @@ export default function About() {
             </Typography>
 
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Box component="img" src={Logo} alt="HorseStore products" sx={{ width: { xs: "50%", md: "20%" }, borderRadius: 2, my: 2.5 }} />
+              <Box component="img" src={Logo} alt="HorseStore products" sx={{ width: { xs: "50%", md: "20%" }, borderRadius: 2, my: 2.5 , bgcolor: "white" }} />
             </Box>
 
             <Typography sx={{ color: "text.secondary", lineHeight: 1.8, mb: 2.5 }}>
