@@ -1,0 +1,12 @@
+node_modules/
+.env
+uploads/products/*
+uploads/categories/*
+uploads/blogs/*
+!uploads/products/.gitkeep
+!uploads/categories/.gitkeep
+!uploads/blogs/.gitkeep
+*.log
+.DS_Store
+dist/
+build/
