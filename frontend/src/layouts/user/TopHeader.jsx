@@ -19,9 +19,9 @@ export default function TopHeader() {
           <Box
             component={Link}
             to="/"
-            sx={{ width: 160, bgcolor: "divider", p: 1.25, borderRadius: "20px", display: "flex" }}
+            sx={{ width: 160,p: 1.25, borderRadius: "20px", display: "flex" }}
           >
-            <Box component="img" src={Logo} alt="Logo" sx={{ width: "100%", objectFit: "contain" }} />
+            <Box component="img" src={Logo} alt="Logo" sx={{ width: "100%",  bgcolor: "white", objectFit: "contain" , p: "10px", borderRadius: "20px" }} />
           </Box>
 
           <SearchBox />

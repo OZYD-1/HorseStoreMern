@@ -3,6 +3,7 @@ import { Box, Container, Grid, Typography, Stack, Link as MuiLink } from "@mui/m
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import icon from "../../img/icon.jpg";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -19,7 +20,7 @@ export default function Footer() {
           {/* Brand */}
           <Grid item xs={12} md={4}>
             <Typography variant="h4" sx={{ color: "primary.main", fontWeight: 700, letterSpacing: "0.05em", mb: 2 }}>
-              HorseStore
+            <Box component="img" src={icon} alt="icon" sx={{ width: "25px" , borderRadius: "20%" }}/> HorseStore
             </Typography>
             <Typography sx={{ color: "#e5e5e5d5", lineHeight: 1.7, maxWidth: 320 }}>
               🐎 Horse Store – Power up your world with the latest phones, screens & electronics. Top quality. Best prices. Fast delivery.

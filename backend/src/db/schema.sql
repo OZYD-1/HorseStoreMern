@@ -193,106 +193,161 @@ INSERT INTO categories (name, slug) VALUES ('Tablets', 'tablets')
 INSERT INTO categories (name, slug) VALUES ('Mobile Accessories', 'mobile-accessories')
   ON CONFLICT (name) DO NOTHING;
 
--- =========================================================
--- demo data for products
--- =========================================================
- 
--- Smartphones
+-- ---------------------------------------------------------
+-- Smartphones (15 new products, real photos)
+-- ---------------------------------------------------------
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'iPhone 9', 'iphone-9', 'An apple mobile which is nothing like apple', 549, 494.10, 94, 'Apple',
-  '["https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"]'::jsonb, 4.7, TRUE,
+SELECT 'iPhone 5s', 'iphone-5s', 'A compact classic with a reliable, well-rounded user experience.', 199.99, 174.15, 25, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/1.webp"]'::jsonb, 2.8, FALSE,
   (SELECT id FROM categories WHERE slug = 'smartphones')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-9');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-5s');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'iPhone X', 'iphone-x', 'SIM-Free, Model A19211 6.5-inch Super Retina HD display', 899, 810.51, 34, 'Apple',
-  '["https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"]'::jsonb, 4.4, TRUE,
+SELECT 'iPhone 6', 'iphone-6', 'A stylish larger-screen iPhone with solid everyday performance.', 299.99, 279.93, 60, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/iphone-6/1.webp"]'::jsonb, 3.4, FALSE,
   (SELECT id FROM categories WHERE slug = 'smartphones')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-x');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-6');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Samsung Universe 9', 'samsung-universe-9', 'Samsung''s new variant which goes beyond Galaxy to the Universe', 1249, 1136.59, 36, 'Samsung',
-  '["https://cdn.dummyjson.com/product-images/3/thumbnail.jpg"]'::jsonb, 4.0, FALSE,
+SELECT 'iPhone 13 Pro', 'iphone-13-pro', 'Flagship iPhone with a pro camera system and top-tier performance.', 1099.99, 996.85, 56, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/1.webp"]'::jsonb, 4.1, TRUE,
   (SELECT id FROM categories WHERE slug = 'smartphones')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-universe-9');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-13-pro');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'OPPOF19', 'oppof19', 'OPPO F19 is officially announced on April 2021', 280, 254.80, 123, 'OPPO',
-  '["https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"]'::jsonb, 4.3, FALSE,
+SELECT 'Oppo A57', 'oppo-a57', 'A capable, affordable mid-ranger with a clean, sleek design.', 249.99, 243.92, 19, 'Oppo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/1.webp"]'::jsonb, 3.9, FALSE,
   (SELECT id FROM categories WHERE slug = 'smartphones')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'oppof19');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'oppo-a57');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Huawei P30', 'huawei-p30', 'Huawei’s re-badged P30 offers a stunning quad-camera system', 499, NULL, 32, 'Huawei',
-  '["https://cdn.dummyjson.com/product-images/5/thumbnail.jpg"]'::jsonb, 4.1, FALSE,
+SELECT 'Oppo F19 Pro Plus', 'oppo-f19-pro-plus', 'Camera-focused Oppo flagship with strong photography features.', 399.99, 325.44, 78, 'Oppo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/1.webp"]'::jsonb, 3.5, TRUE,
   (SELECT id FROM categories WHERE slug = 'smartphones')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'huawei-p30');
- 
--- Laptops
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'oppo-f19-pro-plus');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'MacBook Pro', 'macbook-pro', 'MacBook Pro 2021 with mini-LED display may launch between September, October', 1749, 1574.10, 83, 'Apple',
-  '["https://cdn.dummyjson.com/product-images/6/thumbnail.jpg"]'::jsonb, 4.6, TRUE,
+SELECT 'Oppo K1', 'oppo-k1', 'Stylish design with reliable everyday performance.', 299.99, 245.14, 55, 'Oppo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/1.webp"]'::jsonb, 4.3, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'oppo-k1');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Realme C35', 'realme-c35', 'Budget-friendly phone with all the everyday essentials.', 149.99, 127.05, 48, 'Realme',
+  '["https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/realme-c35/1.webp"]'::jsonb, 4.2, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'realme-c35');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Realme X', 'realme-x', 'Sleek mid-ranger balancing design, camera, and performance.', 299.99, 279.15, 12, 'Realme',
+  '["https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/realme-x/1.webp"]'::jsonb, 3.7, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'realme-x');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Realme XT', 'realme-xt', 'Camera-focused device with advanced sensors for photography fans.', 349.99, 309.72, 80, 'Realme',
+  '["https://cdn.dummyjson.com/product-images/smartphones/realme-xt/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/realme-xt/1.webp"]'::jsonb, 4.6, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'realme-xt');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Samsung Galaxy S7', 'samsung-galaxy-s7', 'Flagship Samsung device with a sharp display and strong camera.', 299.99, 241.37, 67, 'Samsung',
+  '["https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s7/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s7/1.webp"]'::jsonb, 3.3, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-galaxy-s7');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Samsung Galaxy S8', 'samsung-galaxy-s8', 'Premium Infinity Display device with cutting-edge camera tech.', 499.99, 402.76, 0, 'Samsung',
+  '["https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s8/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s8/1.webp"]'::jsonb, 4.4, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-galaxy-s8');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Samsung Galaxy S10', 'samsung-galaxy-s10', 'Dynamic AMOLED flagship with a versatile multi-camera system.', 699.99, 660.87, 19, 'Samsung',
+  '["https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/1.webp"]'::jsonb, 3.1, TRUE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-galaxy-s10');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Vivo S1', 'vivo-s1', 'Mid-range device blending sharp design with dependable performance.', 249.99, 224.58, 50, 'Vivo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/1.webp"]'::jsonb, 3.5, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'vivo-s1');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Vivo V9', 'vivo-v9', 'Notch-display phone built around a strong dual-camera selfie setup.', 299.99, 247.04, 82, 'Vivo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/vivo-v9/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/vivo-v9/1.webp"]'::jsonb, 3.6, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'vivo-v9');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Vivo X21', 'vivo-x21', 'Premium Vivo device with an in-display fingerprint sensor.', 499.99, 412.95, 7, 'Vivo',
+  '["https://cdn.dummyjson.com/product-images/smartphones/vivo-x21/thumbnail.webp","https://cdn.dummyjson.com/product-images/smartphones/vivo-x21/1.webp"]'::jsonb, 4.3, FALSE,
+  (SELECT id FROM categories WHERE slug = 'smartphones')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'vivo-x21');
+
+-- ---------------------------------------------------------
+-- Laptops (3 new products, real photos)
+-- ---------------------------------------------------------
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Microsoft Surface Laptop 4', 'microsoft-surface-laptop-4', 'A refined, portable touchscreen laptop for work and creativity.', 1499, 1345.65, 68, 'Microsoft Surface',
+  '["https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"]'::jsonb, 4.4, TRUE,
   (SELECT id FROM categories WHERE slug = 'laptops')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'macbook-pro');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'microsoft-surface-laptop-4');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Samsung Galaxy Book', 'samsung-galaxy-book', 'Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip', 1499, 1349.10, 50, 'Samsung',
-  '["https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"]'::jsonb, 4.2, FALSE,
+SELECT 'Infinix INBOOK', 'infinix-inbook', 'Infinix Inbook X1 — Core i3 10th Gen, 8GB RAM, 256GB SSD.', 1099, 969.14, 96, 'Infinix',
+  '["https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"]'::jsonb, 4.5, FALSE,
   (SELECT id FROM categories WHERE slug = 'laptops')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-galaxy-book');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'infinix-inbook');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Lenovo ThinkPad X1', 'lenovo-thinkpad-x1', 'Business ultrabook with legendary keyboard and long battery life', 1299, NULL, 60, 'Lenovo',
-  '["https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"]'::jsonb, 4.3, FALSE,
+SELECT 'HP Pavilion 15-DK1056WM', 'hp-pavilion-15-dk1056wm', 'Gaming laptop — Core i5 10th Gen, 8GB RAM, GTX 1650 4GB.', 1099, 1030.09, 89, 'HP Pavilion',
+  '["https://cdn.dummyjson.com/product-images/10/thumbnail.jpg"]'::jsonb, 4.4, FALSE,
   (SELECT id FROM categories WHERE slug = 'laptops')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'lenovo-thinkpad-x1');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'hp-pavilion-15-dk1056wm');
+
+-- ---------------------------------------------------------
+-- Mobile Accessories (7 new products, real photos)
+-- ---------------------------------------------------------
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Dell XPS 15', 'dell-xps-15', 'Premium laptop with InfinityEdge display and powerful performance', 1599, 1439.10, 45, 'Dell',
-  '["https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"]'::jsonb, 4.5, TRUE,
-  (SELECT id FROM categories WHERE slug = 'laptops')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'dell-xps-15');
- 
--- Tablets
-INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'iPad Air', 'ipad-air', 'Colorful, gorgeous screen, powerful chip, all-day battery life', 599, 539.10, 70, 'Apple',
-  '["https://cdn.dummyjson.com/product-images/10/thumbnail.jpg"]'::jsonb, 4.6, TRUE,
-  (SELECT id FROM categories WHERE slug = 'tablets')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'ipad-air');
- 
-INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Samsung Galaxy Tab S7', 'samsung-galaxy-tab-s7', 'Powerful tablet with S Pen included and stunning AMOLED display', 649, NULL, 55, 'Samsung',
-  '["https://cdn.dummyjson.com/product-images/11/thumbnail.jpg"]'::jsonb, 4.4, FALSE,
-  (SELECT id FROM categories WHERE slug = 'tablets')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'samsung-galaxy-tab-s7');
- 
-INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Lenovo Tab P11', 'lenovo-tab-p11', 'Affordable tablet with large display, perfect for entertainment', 279, 251.10, 90, 'Lenovo',
-  '["https://cdn.dummyjson.com/product-images/12/thumbnail.jpg"]'::jsonb, 4.0, FALSE,
-  (SELECT id FROM categories WHERE slug = 'tablets')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'lenovo-tab-p11');
- 
--- Mobile Accessories
-INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Wireless Charging Pad', 'wireless-charging-pad', 'Fast wireless charging pad compatible with all Qi-enabled devices', 29.99, NULL, 200, 'Generic',
-  '["https://cdn.dummyjson.com/product-images/13/thumbnail.jpg"]'::jsonb, 4.1, FALSE,
+SELECT 'Apple AirPods Max Silver', 'apple-airpods-max-silver', 'Premium over-ear headphones with adaptive EQ and active noise cancellation.', 549.99, 474.83, 59, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods-max-silver/1.webp"]'::jsonb, 3.5, TRUE,
   (SELECT id FROM categories WHERE slug = 'mobile-accessories')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'wireless-charging-pad');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'apple-airpods-max-silver');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Bluetooth Earbuds', 'bluetooth-earbuds', 'True wireless earbuds with noise cancellation and long battery life', 59.99, 49.99, 150, 'Generic',
-  '["https://cdn.dummyjson.com/product-images/14/thumbnail.jpg"]'::jsonb, 4.3, TRUE,
+SELECT 'Apple iPhone Charger', 'apple-iphone-charger', 'High-quality charger for fast, efficient iPhone charging.', 19.99, 16.28, 31, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/apple-iphone-charger/1.webp"]'::jsonb, 4.2, FALSE,
   (SELECT id FROM categories WHERE slug = 'mobile-accessories')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'bluetooth-earbuds');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'apple-iphone-charger');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Phone Tripod Stand', 'phone-tripod-stand', 'Adjustable tripod stand for smartphones, perfect for content creators', 19.99, NULL, 300, 'Generic',
-  '["https://cdn.dummyjson.com/product-images/15/thumbnail.jpg"]'::jsonb, 3.9, FALSE,
+SELECT 'Apple MagSafe Battery Pack', 'apple-magsafe-battery-pack', 'Portable battery pack that attaches magnetically to MagSafe iPhones.', 99.99, 82.85, 1, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/apple-magsafe-battery-pack/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/apple-magsafe-battery-pack/1.webp"]'::jsonb, 3.6, FALSE,
   (SELECT id FROM categories WHERE slug = 'mobile-accessories')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'phone-tripod-stand');
- 
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'apple-magsafe-battery-pack');
+
 INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
-SELECT 'Fast Charging Cable Set', 'fast-charging-cable-set', 'Pack of 3 durable fast-charging USB-C cables', 15.99, 12.99, 250, 'Generic',
-  '["https://cdn.dummyjson.com/product-images/16/thumbnail.jpg"]'::jsonb, 4.2, FALSE,
+SELECT 'Beats Flex Wireless Earphones', 'beats-flex-wireless-earphones', 'Comfortable magnetic wireless earbuds with up to 12 hours battery life.', 49.99, 47.13, 50, 'Beats',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/beats-flex-wireless-earphones/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/beats-flex-wireless-earphones/1.webp"]'::jsonb, 4.2, TRUE,
   (SELECT id FROM categories WHERE slug = 'mobile-accessories')
-WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'fast-charging-cable-set');
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'beats-flex-wireless-earphones');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'iPhone 12 Silicone Case with MagSafe (Plum)', 'iphone-12-silicone-case-magsafe-plum', 'Stylish, protective silicone case for iPhone 12 with MagSafe support.', 29.99, 25.84, 69, 'Apple',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/iphone-12-silicone-case-with-magsafe-plum/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/iphone-12-silicone-case-with-magsafe-plum/1.webp"]'::jsonb, 3.6, FALSE,
+  (SELECT id FROM categories WHERE slug = 'mobile-accessories')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'iphone-12-silicone-case-magsafe-plum');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Selfie Lamp with iPhone Clip', 'selfie-lamp-with-iphone-clip', 'Adjustable LED clip-on light for brighter selfies and video calls.', 14.99, 12.08, 58, 'GadgetMaster',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-lamp-with-iphone/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-lamp-with-iphone/1.webp"]'::jsonb, 3.6, FALSE,
+  (SELECT id FROM categories WHERE slug = 'mobile-accessories')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'selfie-lamp-with-iphone-clip');
+
+INSERT INTO products (name, slug, description, price, sale_price, stock, brand, images, rating, is_featured, category_id)
+SELECT 'Selfie Stick Monopod', 'selfie-stick-monopod', 'Extendable, foldable monopod compatible with smartphones and cameras.', 12.99, 10.51, 11, 'SnapTech',
+  '["https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-stick-monopod/thumbnail.webp","https://cdn.dummyjson.com/product-images/mobile-accessories/selfie-stick-monopod/1.webp"]'::jsonb, 3.9, FALSE,
+  (SELECT id FROM categories WHERE slug = 'mobile-accessories')
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE slug = 'selfie-stick-monopod');
