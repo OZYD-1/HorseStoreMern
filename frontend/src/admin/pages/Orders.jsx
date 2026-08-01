@@ -37,8 +37,8 @@ export default function Orders() {
   };
 
   const columns = [
-    { field: "id", headerName: "Order ID", width: 110, valueFormatter: (v) => `#${v.value.slice(0, 8)}` },
-    { field: "totalPrice", headerName: "Total", width: 100, valueFormatter: (v) => `$${Number(v.value).toFixed(2)}` },
+    { field: "id", headerName: "Order ID", width: 110, valueFormatter: (value) => `#${value.slice(0, 8)}` },
+    { field: "totalPrice", headerName: "Total", width: 100, valueFormatter: (value) => `$${Number(value).toFixed(2)}` },
     { field: "shippingAddress", headerName: "Shipping Address", flex: 1, minWidth: 160 },
     { field: "phone", headerName: "Phone", width: 130 },
     {
@@ -57,7 +57,7 @@ export default function Orders() {
         </Select>
       ),
     },
-    { field: "createdAt", headerName: "Date", width: 160, valueFormatter: (v) => new Date(v.value).toLocaleDateString("ar-EG") },
+    { field: "createdAt", headerName: "Date", width: 160, valueFormatter: (value) => new Date(value).toLocaleDateString("ar-EG") },
   ];
 
   return (

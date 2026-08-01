@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export default {
+const nodeEnv = process.env.NODE_ENV || "development";
+
+const env = {
   port: process.env.PORT || 5000,
-  nodeEnv: process.env.NODE_ENV || "development",
+  nodeEnv,
   clientUrl: process.env.CLIENT_URL || "http://localhost:5173",
   adminUrl: process.env.ADMIN_URL || "http://localhost:5174",
 
@@ -32,3 +34,24 @@ export default {
     maxSizeMb: Number(process.env.MAX_FILE_SIZE_MB || 5),
   },
 };
+
+// Refuse to boot in production with well-known, publicly-visible default secrets.
+if (nodeEnv === "production") {
+  const insecureDefaults = [
+    ["JWT_ACCESS_SECRET", env.jwt.accessSecret, "access_secret"],
+    ["JWT_REFRESH_SECRET", env.jwt.refreshSecret, "refresh_secret"],
+    ["CONFIRM_TOKEN_SECRET", env.confirmToken.secret, "confirm_secret"],
+    ["DB_PASSWORD", env.db.password, "postgres"],
+  ];
+  const usedDefaults = insecureDefaults.filter(([, value, fallback]) => value === fallback);
+
+  if (usedDefaults.length > 0) {
+    const names = usedDefaults.map(([name]) => name).join(", ");
+    console.error(
+      `Refusing to start in production: the following env vars are missing and are falling back to insecure defaults: ${names}`
+    );
+    process.exit(1);
+  }
+}
+
+export default env;

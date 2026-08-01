@@ -54,7 +54,7 @@ export default function Products() {
       renderCell: (params) => <Avatar variant="rounded" src={getProductImageUrl(params.row.images?.[0])} />,
     },
     { field: "name", headerName: "Product Name", flex: 1, minWidth: 180 },
-    { field: "price", headerName: "Price", width: 90, valueFormatter: (v) => `$${Number(v.value).toFixed(2)}` },
+    { field: "price", headerName: "Price", width: 90, valueFormatter: (value) => `$${Number(value).toFixed(2)}` },
     { field: "stock", headerName: "Stock", width: 90 },
     {
       field: "isActive", headerName: "Status", width: 100,

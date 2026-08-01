@@ -22,12 +22,16 @@ export const addToCart = catchAsync(async (req, res) => {
 
   const product = await ProductModel.findById(productId);
   if (!product || !product.is_active) throw ApiError.notFound("Product not found");
-  if (product.stock < quantity) throw ApiError.badRequest("Requested quantity is not available in stock");
+  
 
   let item = await CartItemModel.findOne(req.user.id, productId);
+  const totalQuantity = (item ? item.quantity : 0) + Number(quantity);
 
+  if (product.stock < totalQuantity) {
+    throw ApiError.badRequest("Requested quantity is not available in stock");
+  }
   if (item) {
-    item = await CartItemModel.updateQuantity(item.id, item.quantity + Number(quantity));
+    item = await CartItemModel.updateQuantity(item.id, totalQuantity);
   } else {
     item = await CartItemModel.create({ userId: req.user.id, productId, quantity });
   }

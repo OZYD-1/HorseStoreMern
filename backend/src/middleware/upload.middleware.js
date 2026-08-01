@@ -6,6 +6,12 @@ import env from "../config/env.js";
 import ApiError from "../utils/ApiError.js";
 
 const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+const EXT_BY_MIME = {
+  "image/jpeg": ".jpg",
+  "image/jpg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+};
 
 function makeStorage(subfolder) {
   const dest = path.join(process.cwd(), env.upload.dir, subfolder);
@@ -14,7 +20,7 @@ function makeStorage(subfolder) {
   return multer.diskStorage({
     destination: (req, file, cb) => cb(null, dest),
     filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname);
+      const ext = EXT_BY_MIME[file.mimetype] || ".jpg";
       cb(null, `${uuidv4()}${ext}`);
     },
   });
@@ -22,7 +28,11 @@ function makeStorage(subfolder) {
 
 function fileFilter(req, file, cb) {
   if (!ALLOWED_MIME.includes(file.mimetype)) {
-    return cb(ApiError.badRequest("The image format is not supported (jpg, png, webp only)"));
+    return cb(
+      ApiError.badRequest(
+        "The image format is not supported (jpg, png, webp only)",
+      ),
+    );
   }
   cb(null, true);
 }

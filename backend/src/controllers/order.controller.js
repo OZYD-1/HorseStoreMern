@@ -18,17 +18,27 @@ export const createOrder = catchAsync(async (req, res) => {
       throw ApiError.badRequest("Cart is empty, cannot place order");
     }
 
+    const productIds = cartItems.map((item) => item.product_id);
+    const { rows: lockedProducts } = await client.query(
+      `SELECT id, name, price, sale_price, stock, is_active
+       FROM products WHERE id = ANY($1::uuid[]) FOR UPDATE`,
+      [productIds]
+    );
+    const productById = new Map(lockedProducts.map((p) => [p.id, p]));
+
     for (const item of cartItems) {
-      if (!item.is_active) {
+      const product = productById.get(item.product_id);
+      if (!product || !product.is_active) {
         throw ApiError.badRequest(`One of the products is no longer available`);
       }
-      if (item.stock < item.quantity) {
+      if (product.stock < item.quantity) {
         throw ApiError.badRequest(`The available quantity of "${item.name}" is not sufficient`);
       }
     }
 
     const totalPrice = cartItems.reduce((sum, item) => {
-      const price = item.sale_price || item.price;
+      const product = productById.get(item.product_id);
+      const price = product.sale_price || product.price;
       return sum + Number(price) * item.quantity;
     }, 0);
 
@@ -38,13 +48,14 @@ export const createOrder = catchAsync(async (req, res) => {
     );
 
     for (const item of cartItems) {
+      const product = productById.get(item.product_id);
       await OrderItemModel.create(
         {
           orderId: newOrder.id,
           productId: item.product_id,
           productName: item.name,
           quantity: item.quantity,
-          price: item.sale_price || item.price,
+          price: product.sale_price || product.price,
         },
         client
       );

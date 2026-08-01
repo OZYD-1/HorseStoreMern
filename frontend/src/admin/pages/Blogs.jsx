@@ -46,7 +46,7 @@ export default function Blogs() {
       field: "isPublished", headerName: "Status", width: 100,
       renderCell: (p) => <Chip label={p.value ? "Published" : "Draft"} color={p.value ? "success" : "default"} size="small" />,
     },
-    { field: "createdAt", headerName: "Date", width: 140, valueFormatter: (v) => new Date(v.value).toLocaleDateString("ar-EG") },
+    { field: "createdAt", headerName: "Date", width: 140, valueFormatter: (value) => new Date(value).toLocaleDateString("ar-EG") },
     {
       field: "actions", headerName: "Actions", width: 110, sortable: false,
       renderCell: (params) => (

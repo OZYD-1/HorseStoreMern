@@ -124,9 +124,12 @@ export const ProductModel = {
   async decrementStock(id, quantity, client) {
     const exec = client ? client.query.bind(client) : query;
     const { rows } = await exec(
-      `UPDATE products SET stock = stock - $1 WHERE id = $2 RETURNING *`,
+      `UPDATE products SET stock = stock - $1 WHERE id = $2 AND stock >= $1 RETURNING *`,
       [quantity, id]
     );
+    if (!rows[0]) {
+      throw new Error(`Insufficient stock for product ${id}`);
+    }
     return rows[0];
   },
 

@@ -7,6 +7,7 @@ import UserLayout from "./layouts/UserLayout.jsx";
 import Home from "./pages/home/Home.jsx";
 import About from "./pages/about/About.jsx";
 import Blog from "./pages/blog/Blog.jsx";
+import BlogDetails from "./pages/blog/BlogDetails.jsx";
 import Accessories from "./pages/accessories/Accessories.jsx";
 import Cart from "./pages/cart/Cart.jsx";
 import CategoryPage from "./pages/categoryPage/CategoryPage.jsx";
@@ -14,6 +15,7 @@ import Favorites from "./pages/favorites/Favorites.jsx";
 import ProductDetails from "./pages/productDetails/ProductDetails.jsx";
 import SearchResults from "./pages/SearchResults.jsx";
 import Contact from "./pages/contact/Contact.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import { RequireAuth, RequireAdmin } from "./routes/guards.jsx";
@@ -33,54 +35,66 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-      {/* ---------- store pages ---------- */}
-      <Route
-        element={
-          <ThemeModeProvider variant="user">
-            <UserLayout />
-          </ThemeModeProvider>
-        }
-      >
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="accessories" element={<Accessories />} />
-        <Route path="category/:slug" element={<CategoryPage />} />
-        <Route path="product/:slug" element={<ProductDetails />} />
-        <Route path="search" element={<SearchResults />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        {/* ---------- store pages ---------- */}
+        <Route
+          element={
+            <ThemeModeProvider variant="user">
+              <UserLayout />
+            </ThemeModeProvider>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogDetails />} />
+          <Route path="accessories" element={<Accessories />} />
+          <Route path="category/:slug" element={<CategoryPage />} />
+          <Route path="product/:slug" element={<ProductDetails />} />
+          <Route path="search" element={<SearchResults />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
 
-        {/* pages that require authentication */}
-        <Route element={<RequireAuth />}>
-          <Route path="cart" element={<Cart />} />
-          <Route path="favorites" element={<Favorites />} />
+          {/* pages that require authentication */}
+          <Route element={<RequireAuth />}>
+            <Route path="cart" element={<Cart />} />
+            <Route path="favorites" element={<Favorites />} />
+          </Route>
         </Route>
-      </Route>
 
-      {/* ---------- admin panel (different theme) ---------- */}
-      <Route
-        element={
-          <ThemeModeProvider variant="admin">
-            <Routes>
-              <Route path="login" element={<AdminLogin />} />
-              <Route element={<RequireAdmin />}>
-                <Route element={<AdminLayout />}>
-                  <Route index element={<Dashboard />} />
-                  <Route path="products" element={<AdminProducts />} />
-                  <Route path="categories" element={<AdminCategories />} />
-                  <Route path="orders" element={<AdminOrders />} />
-                  <Route path="blogs" element={<AdminBlogs />} />
-                  <Route path="users" element={<AdminUsers />} />
+        {/* ---------- admin panel (different theme) ---------- */}
+        <Route
+          element={
+            <ThemeModeProvider variant="admin">
+              <Routes>
+                <Route path="login" element={<AdminLogin />} />
+                <Route element={<RequireAdmin />}>
+                  <Route element={<AdminLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="categories" element={<AdminCategories />} />
+                    <Route path="orders" element={<AdminOrders />} />
+                    <Route path="blogs" element={<AdminBlogs />} />
+                    <Route path="users" element={<AdminUsers />} />
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
-          </ThemeModeProvider>
-        }
-        path="bgadmin/*"
-      />
-    </Routes>
+              </Routes>
+            </ThemeModeProvider>
+          }
+          path="bgadmin/*"
+        />
+        {/* ---------- fallback ---------- */}
+        <Route
+          path="*"
+          element={
+            <ThemeModeProvider variant="user">
+              <UserLayout />
+            </ThemeModeProvider>
+          }
+        >
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </>
   );
 }
