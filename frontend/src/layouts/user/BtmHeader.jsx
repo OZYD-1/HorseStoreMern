@@ -6,6 +6,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { categoryApi } from "../../api/categoryApi.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 
@@ -96,11 +97,18 @@ export default function BtmHeader() {
           {/* Auth icons */}
           <Box sx={{ display: "flex", gap: 2 }}>
             {user ? (
-              <Tooltip title={`Logout (${user.name})`}>
-                <IconButton onClick={logout} sx={{ color: "#fff" }}>
-                  <LogoutIcon />
-                </IconButton>
-              </Tooltip>
+              <>
+                <Tooltip title="My Profile">
+                  <IconButton component={Link} to="/profile" sx={{ color: "#fff" }}>
+                    <AccountCircleIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={`Logout (${user.name})`}>
+                  <IconButton onClick={logout} sx={{ color: "#fff" }}>
+                    <LogoutIcon />
+                  </IconButton>
+                </Tooltip>
+              </>
             ) : (
               <>
                 <Tooltip title="Sign In">

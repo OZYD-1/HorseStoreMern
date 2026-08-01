@@ -18,6 +18,7 @@ import Contact from "./pages/contact/Contact.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
+import Profile from "./pages/auth/Profile.jsx";
 import { RequireAuth, RequireAdmin } from "./routes/guards.jsx";
 
 // Admin (bgadmin)
@@ -59,6 +60,7 @@ export default function App() {
           <Route element={<RequireAuth />}>
             <Route path="cart" element={<Cart />} />
             <Route path="favorites" element={<Favorites />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
 

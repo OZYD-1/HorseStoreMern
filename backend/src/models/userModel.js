@@ -46,6 +46,20 @@ export const UserModel = {
     return rows[0];
   },
 
+  async updateProfile(id, { name, phone, address, avatar }) {
+    const { rows } = await query(
+      `UPDATE users SET
+         name = COALESCE($1, name),
+         phone = COALESCE($2, phone),
+         address = COALESCE($3, address),
+         avatar = COALESCE($4, avatar)
+       WHERE id = $5
+       RETURNING *`,
+      [name ?? null, phone ?? null, address ?? null, avatar ?? null, id]
+    );
+    return rows[0];
+  },
+
   async setActive(id, isActive) {
     const { rows } = await query(
       `UPDATE users SET is_active = $1 WHERE id = $2 RETURNING *`,

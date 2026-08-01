@@ -17,3 +17,7 @@ export function getCategoryImageUrl(filename) {
 export function getBlogImageUrl(filename) {
   return getUploadUrl("blogs", filename);
 }
+
+export function getAvatarImageUrl(filename) {
+  return getUploadUrl("avatars", filename);
+}

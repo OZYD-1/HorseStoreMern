@@ -54,3 +54,9 @@ export const uploadBlogImage = multer({
   fileFilter,
   limits: { fileSize: env.upload.maxSizeMb * 1024 * 1024 },
 }).single("image");
+
+export const uploadAvatar = multer({
+  storage: makeStorage("avatars"),
+  fileFilter,
+  limits: { fileSize: env.upload.maxSizeMb * 1024 * 1024 },
+}).single("avatar");

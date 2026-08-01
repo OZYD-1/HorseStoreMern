@@ -2,6 +2,7 @@ import { UserModel, RefreshTokenModel } from "../models/index.js";
 import catchAsync from "../utils/catchAsync.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/apiResponse.js";
+import { deleteUploadedFile } from "../utils/fileHelper.js";
 import {
   generateAccessToken,
   generateRefreshToken,
@@ -114,6 +115,20 @@ export const logout = catchAsync(async (req, res) => {
 
 export const getMe = catchAsync(async (req, res) => {
   new ApiResponse(200, { user: UserModel.toSafeUser(req.user) }, "Account data").send(res);
+});
+
+export const updateProfile = catchAsync(async (req, res) => {
+  const { name, phone, address } = req.body;
+  const currentUser = req.user;
+
+  let avatar = null;
+  if (req.file) {
+    deleteUploadedFile("avatars", currentUser.avatar);
+    avatar = req.file.filename;
+  }
+
+  const updated = await UserModel.updateProfile(currentUser.id, { name, phone, address, avatar });
+  new ApiResponse(200, { user: UserModel.toSafeUser(updated) }, "Profile updated successfully").send(res);
 });
 
 export const changePassword = catchAsync(async (req, res) => {
