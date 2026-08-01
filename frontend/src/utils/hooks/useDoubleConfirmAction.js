@@ -13,9 +13,9 @@ export function useDoubleConfirmAction({ actionFn, onSuccess, onError }) {
         setMessage(data.message || "Are you sure you want to proceed?");
         setConfirmToken(data.confirmToken);
         setOpen(true);
-        return false; // still pending, not executed yet
+        return false;  
       }
-      return true; // already executed (non-sensitive action)
+      return true; 
     },
     []
   );

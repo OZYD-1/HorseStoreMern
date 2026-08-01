@@ -1,10 +1,6 @@
 import bcrypt from "bcryptjs";
 import { query } from "../config/database.js";
 
-/**
- * كل دالة هون = استعلام SQL خام واحد أو أكثر، بدون أي ORM.
- */
-
 function toSafeUser(row) {
   if (!row) return null;
   const { password, ...safe } = row;
